@@ -4,6 +4,8 @@ export default class View {
         this._canvas_context = this._canvas.getContext('2d');
 
         this.text_value_span = document.getElementById('current_value');
+        this.text_bet_span = document.getElementById('bet_amount');
+        this.text_cash_span = document.getElementById('cash_amount');
     }
 
     set_canvas_size() {
@@ -72,5 +74,13 @@ export default class View {
 
     set_text_value(value) {
         this.text_value_span.innerText = value;
+    }
+
+    set_bet(bet) {
+        this.text_bet_span.innerText = Number(bet).toLocaleString();
+    }
+
+    set_cash(cash) {
+        this.text_cash_span.innerText = Number(cash).toLocaleString();
     }
 }

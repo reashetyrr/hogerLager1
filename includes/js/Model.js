@@ -21,4 +21,32 @@ export default class Model {
         this._current_amount = amount;
         return amount;
     }
+
+    add_cash(amount) {
+        this._cash += amount;
+    }
+
+    increase_bet() {
+        this._inzet += 10;
+        this._cash -= 10;
+    }
+
+    set expectation(expectation) {
+        if (![EXPECTATION.HIGHER, EXPECTATION.LOWER].includes(expectation)) {
+            alert('unknown expectation');
+            throw 'unknown expectation';
+        }
+        this._expectation = expectation;
+    }
+
+    was_correct() {
+        const old_amount = this._current_amount;
+        this.amount; // this creates a new amount in this._current_amount
+
+        if (EXPECTATION.LOWER === this._expectation) {
+            return this._current_amount < old_amount;
+        }
+
+        return this._current_amount > old_amount;
+    }
 }

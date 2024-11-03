@@ -20,8 +20,13 @@ export default class Controller {
 
     start() {
         const first_count = this._model.amount;
+        const cash = this._model._cash;
+        const bet = this._model._inzet;
+
         this._view.clear();
         this._view.draw_amount(first_count);
+        this._view.set_cash(cash);
+        this._view.set_bet(bet);
         this._view.set_text_value(first_count);
         this._view.draw_game();
     }
