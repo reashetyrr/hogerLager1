@@ -1,39 +1,89 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>Hoger Lager Voorbeeld</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width">
-        <link rel='stylesheet' type='text/css' href="includes/css/HogerLager.css">
-        <script src="includes/js/hoger_lager.js" language="javascript"></script>
+        <title>Hoger Lager Voorbeeld</title>
+        <link rel='stylesheet' type='text/css' href="includes/css/main.css">
+        <link rel="stylesheet" type="text/css" href="https://cdn.glg-software.com/0x660x61/6.6.0/css/all.min.css" />
     </head>
-    <body>
-        <div id='background'>
-            <header>
-                <span>
-                    Hoger Lager Deluxe
-                </span>
-            </header>
-            <div id='container'>
-                <canvas width='800' height='400'></canvas>
-                
-                <div id='controls'>
-                    <div><button onclick="">Computer gooien</button></div>
-                    <div><input type='radio' name='keuze' onclick="" checked>Hoger</div>
-                    <div>
-                        <table>
-                            <caption>Inzet</caption>
-                            <tr>
-                                <td><img id="inzet" src='images/pijlOmhoog.png' onclick=""/></td>
-                                <td><span id="inzet" id="allIn" onclick=""/>All-In</span></td>
-                                <td><img id="inzet" onclick="" src='images/pijlBeneden.png'/></td>
-                            </tr>
-                        </table>
+    <body class="d-flex f-tb bg-main">
+        <header class="p-1 f-center">
+            <h1>
+                Hoger Lager
+            </h1>
+        </header>
+        <div class='container f-center p-2 d-flex f-tb b-4px bc-darkish mb-2 bg-lighter d-flex f-lr'>
+            <canvas id="game_board" class="b-4pxr bg-main square w-250" width="250" height="250"></canvas>
+            <div class="f-fill p-lr1 d-flex f-tb">
+                <h1 class="f-center">Huidige waarde: <span id="current_value"></span></h1>
+                <div class="d-flex f-lr f-fill">
+                    <div class="f-fill ghost-box">
+                        <h6>Financien:</h6>
+                        <div class="box-content d-flex f-tb f-fill">
+                            <div class="f-fill d-flex f-tb">
+                                <h4>cash: €<span id="cash_amount"></span></h4>
+                                <h4>Current bet: €<span id="bet_amount"></span></h4>
+                                <div class="f-fill d-flex f-lr p-1 c-h--40 t-center">
+                                    <div class="f-fill d-flex f-tb" data-clickable data-option="0" data-type="bet">
+                                        <i class="fa-solid fa-caret-up dyn-fs--5cqh f-center"></i>
+                                        raise
+                                    </div>
+                                    <div class="f-fill d-flex f-tb" data-clickable data-option="2" data-type="bet">
+                                        <h5 class="lh-40">All-in</h5>
+                                    </div>
+                                    <div class="f-fill d-flex f-tb" data-clickable data-option="1" data-type="bet">
+                                        <i class="fa-solid fa-caret-down dyn-fs--5cqh f-center"></i>
+                                        lower
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                    <div>Lager<input type='radio' name='keuze' onclick=""></div>
-                    <div><button onclick="">Speler gooien</button></div>
+                    <div class="f-fill ghost-box">
+                        <h6>Volgende waarde is:</h6>
+                        <div class="box-content d-flex f-tb f-fill">
+                            <div class="d-flex f-fill" data-option="choice" data-clickable><i class="fa-solid fa-caret-up dyn-fs--20cqh m-center"></i></div>
+                            <i class="seperator"></i>
+                            <div class="d-flex f-fill" data-option="choice" data-clickable><i class="fa-solid fa-caret-down dyn-fs--20cqh m-center" data-option="choice" data-clickable></i></div>
+                        </div>
+                    </div>
                 </div>
             </div>
+
+<!--            <div id='controls'>-->
+<!--                <div><button onclick="">Computer gooien</button></div>-->
+<!--                <div><input type='radio' name='keuze' onclick="" checked>Hoger</div>-->
+<!--                <div>-->
+<!--                    <table>-->
+<!--                        <caption>Inzet</caption>-->
+<!--                        <tr>-->
+<!--                            <td><img id="inzet" src='images/pijlOmhoog.png' onclick=""/></td>-->
+<!--                            <td><span id="inzet" id="allIn" onclick=""/>All-In</span></td>-->
+<!--                            <td><img id="inzet" onclick="" src='images/pijlBeneden.png'/></td>-->
+<!--                        </tr>-->
+<!--                    </table>-->
+<!--                </div>-->
+<!--                <div>Lager<input type='radio' name='keuze' onclick=""></div>-->
+<!--                <div><button onclick="">Speler gooien</button></div>-->
+<!--            </div>-->
         </div>
+        <script type="module">
+            import HogerLager from '/includes/js/HogerLager.js';
+            {
+                window.addEventListener('readystatechange', () => {
+                    if ('complete' !== document.readyState) {
+                        return;
+                    }
+                    const _game = new HogerLager('game_board');
+                    _game.start();
+                });
+
+                if ('complete' !== document.readyState) {
+                    const _game = new HogerLager('game_board');
+                    _game.start();
+                }
+            }
+        </script>
     </body>
 </html>
